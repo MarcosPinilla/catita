@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para mi Catita ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -13,6 +13,11 @@
             --btn-hover: #ffb3b3;
             --shadow: rgba(255, 136, 136, 0.3);
             --wsp-color: #25D366;
+        }
+
+        /* --- FIX PARA CELULARES --- */
+        * {
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -29,8 +34,8 @@
             overflow: hidden; 
             padding: 20px;
             position: relative;
-            user-select: none; 
-            -webkit-user-select: none; /* Para Safari/iOS */
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .container {
@@ -54,6 +59,7 @@
             margin-bottom: 15px;
             filter: drop-shadow(0px 10px 15px var(--shadow));
             transition: opacity 0.5s ease;
+            pointer-events: none; /* Evita que intente guardar la imagen al mantener presionado */
         }
 
         h1 {
@@ -78,8 +84,6 @@
             flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 25px;
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-        -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         .interaction-buttons button {
@@ -98,17 +102,13 @@
             align-items: center;
             gap: 6px;
             z-index: 11;
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
+            touch-action: none; /* Bloquea el zoom sobre los botones */
         }
 
-        .interaction-buttons button:hover {
-            transform: translateY(-3px) scale(1.05);
+        .interaction-buttons button:active {
+            transform: translateY(2px) scale(0.95);
             background-color: var(--btn-hover);
             color: white;
-            box-shadow: 0 8px 20px var(--shadow);
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         /* Contenedor de botones de contacto */
@@ -120,8 +120,6 @@
             margin-top: 10px;
             border-top: 2px dashed #ffb3b3;
             padding-top: 20px;
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         .btn-contact {
@@ -139,52 +137,40 @@
             align-items: center;
             gap: 10px;
             z-index: 11;
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
+            touch-action: manipulation;
         }
 
-        /* Estilo para los SVG dentro de los botones */
         .btn-contact svg {
             width: 22px;
             height: 22px;
             fill: currentColor; 
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         .btn-wsp {
             background-color: var(--wsp-color);
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
-        .btn-wsp:hover {
+        .btn-wsp:hover, .btn-wsp:active {
             background-color: #1ebd5c;
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         .btn-ig {
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
-        .btn-ig:hover {
+        .btn-ig:hover, .btn-ig:active {
             transform: scale(1.05);
             box-shadow: 0 8px 20px rgba(220, 39, 67, 0.4);
             filter: brightness(1.1);
-            touch-action: manipulation; /* Anula el zoom por doble toque rápido */
-    -webkit-tap-highlight-color: transparent; /* Quita el feo recuadro gris/azul que sale al presionar en Android/iOS */
         }
 
         .floating-emoji {
             position: absolute;
             font-size: 2.5rem; 
             pointer-events: none;
-            animation: popAndFloat 2.5s ease-out forwards;
+            animation: popAndFloat 2s ease-out forwards;
             z-index: 5; 
         }
 
@@ -193,19 +179,6 @@
             20% { transform: scale(1.3) translateY(-20px) rotate(10deg); }
             100% { transform: scale(1) translateY(-150px) rotate(-15deg); opacity: 0; }
         }
-        /* --- FIX PARA CELULARES --- */
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-button {
-    touch-action: manipulation;
-}
     </style>
 </head>
 <body>
@@ -219,12 +192,12 @@ button {
         <p id="greeting-desc"></p>
 
         <div class="interaction-buttons">
-            <button onclick="spawnEmojis('💋')">Besos 💋</button>
-            <button onclick="spawnEmojis('🫂')">Abrazos 🫂</button>
-            <button onclick="spawnEmojis('✨')">Caricias 🥰</button>
-            <button onclick="spawnEmojis('🦖')">Mordisquitos 🦖</button>
-            <button onclick="spawnEmojis('🤏')">Apretar Cachetes 🤏</button>
-            <button onclick="spawnEmojis('🫶')">Mucho Amor 🫶</button>
+            <button onpointerdown="spawnEmojis('💋')">Besos 💋</button>
+            <button onpointerdown="spawnEmojis('🫂')">Abrazos 🫂</button>
+            <button onpointerdown="spawnEmojis('✨')">Caricias 🥰</button>
+            <button onpointerdown="spawnEmojis('🦖')">Mordisquitos 🦖</button>
+            <button onpointerdown="spawnEmojis('🤏')">Apretar Cachetes 🤏</button>
+            <button onpointerdown="spawnEmojis('🫶')">Mucho Amor 🫶</button>
         </div>
 
         <div class="contact-buttons">
@@ -244,6 +217,21 @@ button {
     </div>
 
     <script>
+        // --- FIX ANTI-ZOOM EXTREMO PARA EL SPAM ---
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            let now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+        // ------------------------------------------
+
         const contentDB = {
             manana: {
                 titles: ["¡Buenos días mi niña hermosa! ☀️💖", "¡Despierta wawita! 🌻💝", "¡Buen día Catita preciosa! ☕💕", "¡Arriba mi pexoxa! 🥞🩷", "¡Un lindo amanecer para mi bb! 🌅💓", "¡Hola lindaaa, a brillar hoy! ✨💖"],
@@ -325,16 +313,16 @@ button {
             if (isBirthday) {
                 currentData = contentDB.cumpleanos;
                 blockName = "cumpleanos";
-            } else if (hour >= 5 && hour < 13) {
+            } else if (hour >= 5 && hour < 12) {
                 currentData = contentDB.manana;
                 blockName = "manana";
-            } else if (hour >= 13 && hour < 14) {
+            } else if (hour >= 12 && hour < 15) {
                 currentData = contentDB.almuerzo;
                 blockName = "almuerzo";
-            } else if (hour >= 14 && hour < 19) {
+            } else if (hour >= 15 && hour < 18) {
                 currentData = contentDB.tarde;
                 blockName = "tarde";
-            } else if (hour >= 19 && hour < 21) {
+            } else if (hour >= 18 && hour < 21) {
                 currentData = contentDB.iglesia;
                 blockName = "iglesia";
             } else {
@@ -388,8 +376,8 @@ button {
 
                     setTimeout(() => {
                         emoji.remove();
-                    }, 2500);
-                }, i * 50); 
+                    }, 2000);
+                }, i * 40); // Más rápido para el efecto metralleta
             }
         }
 
