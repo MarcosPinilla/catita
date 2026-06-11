@@ -31,7 +31,9 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            overflow: hidden; 
+            /* AQUÍ ESTÁ EL ARREGLO DEL SCROLL */
+            overflow-x: hidden; /* Evita scroll horizontal por los emojis */
+            overflow-y: auto;   /* Permite bajar si la pantalla es pequeña */
             padding: 20px;
             position: relative;
             user-select: none;
@@ -43,6 +45,7 @@
             max-width: 550px;
             width: 100%;
             z-index: 10; 
+            padding: 20px 0; /* Un poco de aire arriba y abajo */
         }
 
         .gif-container {
@@ -59,7 +62,7 @@
             margin-bottom: 15px;
             filter: drop-shadow(0px 10px 15px var(--shadow));
             transition: opacity 0.5s ease;
-            pointer-events: none; /* Evita que intente guardar la imagen al mantener presionado */
+            pointer-events: none; 
         }
 
         h1 {
@@ -102,7 +105,7 @@
             align-items: center;
             gap: 6px;
             z-index: 11;
-            touch-action: none; /* Bloquea el zoom sobre los botones */
+            touch-action: none; 
         }
 
         .interaction-buttons button:active {
@@ -120,6 +123,7 @@
             margin-top: 10px;
             border-top: 2px dashed #ffb3b3;
             padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         .btn-contact {
@@ -167,7 +171,7 @@
         }
 
         .floating-emoji {
-            position: absolute;
+            position: fixed; /* Cambiado a fixed para que vuelen sobre la pantalla sin afectar el scroll */
             font-size: 2.5rem; 
             pointer-events: none;
             animation: popAndFloat 2s ease-out forwards;
