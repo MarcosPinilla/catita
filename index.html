@@ -78,6 +78,7 @@
             margin-bottom: 25px;
             padding: 0 15px;
             line-height: 1.4;
+            white-space: pre-line; /* ¡NUEVO! Permite que los saltos de línea en tu dedicatoria se vean bien */
         }
 
         /* Botones de interacción (besos, abrazos, etc.) */
@@ -300,6 +301,14 @@
                 gifs: [
                     "https://media1.tenor.com/m/ZjxN5ZycrAIAAAAd/cute-love-love.gif"
                 ]
+            },
+            aniversario: {
+                titles: ["¡Feliz primer mes, mi amor! ❤️🎉"],
+                descs: ["Parece poquito tiempo, pero ha sido suficiente para darme cuenta de lo feliz que me hace compartir mi vida contigo. Gracias por cada conversación, cada risa, cada detalle y por hacer que la distancia se sienta mucho más pequeña.\n\nEspero que este sea solo el primero de muchos meses y años que podamos seguir construyendo juntos, aprendiendo el uno del otro y creando recuerdos que siempre nos saquen una sonrisa.\n\nTe amo mucho. Gracias por elegirme cada día.\n\nCon todo mi cariño,\nMarquito"],
+                gifs: [
+                    "https://media1.tenor.com/m/ZjxN5ZycrAIAAAAd/cute-love-love.gif",
+                    "https://media.tenor.com/J7hA4yXfTbwAAAAj/peach-and-goma-love.gif"
+                ]
             }
         };
 
@@ -311,10 +320,17 @@
             // Verificación del cumpleaños: Mes 6 (Julio) y Día 16
             const isBirthday = (now.getMonth() === 6 && now.getDate() === 16);
             
+            // ¡NUEVO! Verificación del primer mes de aniversario: Mes 6 (Julio) y Día 13
+            // Nota: getMonth() empieza a contar desde 0, así que enero es 0 y julio es 6.
+            const isPrimerMes = (now.getMonth() === 6 && now.getDate() === 13);
+            
             let currentData;
             let blockName;
 
-            if (isBirthday) {
+            if (isPrimerMes) {
+                currentData = contentDB.aniversario;
+                blockName = "aniversario";
+            } else if (isBirthday) {
                 currentData = contentDB.cumpleanos;
                 blockName = "cumpleanos";
             } else if (hour >= 5 && hour < 12) {
